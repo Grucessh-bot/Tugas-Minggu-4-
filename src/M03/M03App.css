@@ -1,0 +1,132 @@
+.todo-card {
+  width: min(390px, calc(100% - 10px));
+  min-height: 303px;
+  margin: 0 auto;
+  padding: 39px 20px 28px;
+  background: #fff;
+  border: 1px solid rgb(255 255 255 / 75%);
+  box-shadow: 0 8px 24px rgb(67 76 130 / 14%);
+}
+
+.todo-card h1 {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.todo-subtitle {
+  margin: -14px 0 18px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: pre-wrap;
+}
+
+.todo-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-input input {
+  width: 144px;
+  height: 22px;
+  padding: 2px 4px;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  color: #111;
+  font-size: 13px;
+}
+
+.todo-input input::placeholder {
+  color: #888;
+  opacity: 1;
+}
+
+.todo-input button,
+.delete-button {
+  border: 0;
+  border-radius: 0;
+  background: #ff634f;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.todo-input button {
+  min-width: 85px;
+  height: 24px;
+  padding: 0 9px;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 15px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: 20px 1fr 56px;
+  align-items: center;
+  min-height: 44px;
+}
+
+.todo-item > input {
+  width: 13px;
+  height: 13px;
+  margin: 0 0 0 3px;
+  accent-color: #087bff;
+  cursor: pointer;
+}
+
+.todo-text {
+  justify-self: center;
+  font-size: 16px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+}
+
+.delete-button {
+  width: 56px;
+  height: 24px;
+  padding: 0;
+}
+
+.todo-input button:hover,
+.delete-button:hover {
+  background: #f4513d;
+}
+
+.todo-input button:focus-visible,
+.delete-button:focus-visible,
+.todo-item input:focus-visible,
+.todo-input input:focus-visible {
+  outline: 2px solid #087bff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 380px) {
+  .todo-card {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .todo-item {
+    grid-template-columns: 20px 1fr 56px;
+  }
+
+  .todo-text {
+    font-size: 14px;
+  }
+}
