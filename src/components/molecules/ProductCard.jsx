@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { formatPrice, getCategoryByValue } from "../../data/catalog";
 import styles from "./ProductCard.module.css";
 
-const fallbackImage = "/product-placeholder.svg";
+const fallbackImage = `${import.meta.env.BASE_URL}product-placeholder.svg`;
 
 function ProductCard({ product }) {
   const category = getCategoryByValue(product.kategori);

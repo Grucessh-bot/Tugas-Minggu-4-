@@ -4,7 +4,7 @@ import { formatPrice, getCategoryByValue } from "../../data/catalog";
 import NotFound from "./NotFound";
 import styles from "./ProductPages.module.css";
 
-const fallbackImage = "/product-placeholder.svg";
+const fallbackImage = `${import.meta.env.BASE_URL}product-placeholder.svg`;
 
 function ProductDetail() {
   const { productId } = useParams();
