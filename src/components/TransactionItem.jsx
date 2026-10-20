@@ -1,4 +1,5 @@
 import Icon from "./Icon";
+import { Link } from "react-router-dom";
 import { formatCurrency } from "../data/finance";
 
 const dateFormatter = new Intl.DateTimeFormat("id-ID", {
@@ -16,7 +17,9 @@ function TransactionItem({ transaction, onDelete }) {
             <Icon name={transaction.type === "income" ? "arrowDown" : "arrowUp"} size={17} />
           </span>
           <span>
-            <strong>{transaction.title}</strong>
+            <Link className="transaction-detail-link" to={`/transaksi/${encodeURIComponent(transaction.id)}`}>
+              <strong>{transaction.title}</strong>
+            </Link>
             <small>{transaction.type === "income" ? "Pemasukan" : "Pengeluaran"}</small>
           </span>
         </div>

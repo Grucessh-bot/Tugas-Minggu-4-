@@ -1,19 +1,48 @@
-# React + Vite
+# Pajry Tech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Katalog produk teknologi berbasis React yang menampilkan smartphone, laptop, dan komputer. Aplikasi ini dibuat sebagai proyek multi-halaman dengan React Router, parameter URL dinamis, CSS Modules, dan styled-components.
 
-Currently, two official plugins are available:
+## Menjalankan aplikasi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Periksa build produksi dengan:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+```bash
+npm run build
+npm run preview
+```
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## Halaman
 
-## Expanding the ESLint configuration
+- `/` — Beranda katalog, navigasi kategori, dan produk pilihan.
+- `/kategori/:categorySlug` — Daftar produk pada kategori smartphone, laptop, atau komputer.
+- `/produk/:productId` — Detail produk berdasarkan ID pada URL.
+- Rute dan kategori yang tidak dikenal menampilkan halaman 404 dengan tautan kembali ke beranda.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Fitur
+
+- Navigasi kategori menggunakan React Router tanpa reload penuh.
+- Validasi kategori dan ID produk dari URL sebelum menampilkan halaman.
+- Kartu produk dengan tautan ke halaman detail.
+- Layout responsif untuk desktop, tablet, dan ponsel.
+- Gambar produk memakai placeholder lokal jika gambar utama tidak dapat dimuat.
+
+## Teknologi
+
+- React dan Vite
+- React Router
+- CSS Modules untuk layout, komponen, dan halaman
+- styled-components untuk hero beranda
+
+## Struktur penting
+
+- `src/App.jsx` — konfigurasi route dan layout aplikasi.
+- `src/data/Product.jsx` — data katalog.
+- `src/data/catalog.js` — pemetaan kategori dan format harga.
+- `src/components/organisms/Header.jsx` — navigasi kategori.
+- `src/components/pages/` — halaman beranda, kategori, detail, dan 404.
+- `src/components/molecules/StoreHero.jsx` — hero beranda dengan styled-components.

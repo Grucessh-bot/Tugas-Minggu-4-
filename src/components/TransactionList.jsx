@@ -1,7 +1,9 @@
 import Icon from "./Icon";
 import TransactionItem from "./TransactionItem";
 
-function TransactionList({ transactions, onDelete }) {
+function TransactionList({ transactions, onDelete, limit }) {
+  const visibleTransactions = limit ? transactions.slice(0, limit) : transactions;
+
   return (
     <section className="panel transactions-panel" id="transactions" aria-labelledby="transactions-title">
       <div className="panel-heading transaction-heading">
@@ -9,9 +11,11 @@ function TransactionList({ transactions, onDelete }) {
           <p className="eyebrow">CATATAN TERBARU</p>
           <h2 id="transactions-title">Transaksi</h2>
         </div>
-        <span className="transaction-count">{transactions.length} transaksi</span>
+        <span className="transaction-count">
+          {limit && transactions.length > limit ? `${limit} terbaru dari ${transactions.length}` : `${transactions.length} transaksi`}
+        </span>
       </div>
-      {transactions.length > 0 ? (
+      {visibleTransactions.length > 0 ? (
         <div className="transaction-table-wrap">
           <table className="transaction-table">
             <thead>
@@ -24,7 +28,7 @@ function TransactionList({ transactions, onDelete }) {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((transaction) => (
+              {visibleTransactions.map((transaction) => (
                 <TransactionItem
                   key={transaction.id}
                   onDelete={onDelete}

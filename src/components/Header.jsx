@@ -1,25 +1,32 @@
 import Icon from "./Icon";
+import { NavLink, Link } from "react-router-dom";
 
 function Sidebar() {
   return (
     <aside className="sidebar">
-      <a className="brand" href="#dashboard" aria-label="Dompetku, ke ringkasan">
+      <Link className="brand" to="/" aria-label="Dompetku, ke ringkasan">
         <span className="brand-mark"><Icon name="wallet" size={21} /></span>
         <span>dompet<span className="brand-accent">ku</span></span>
-      </a>
+      </Link>
 
       <p className="sidebar-label">MENU UTAMA</p>
       <nav className="sidebar-nav" aria-label="Navigasi utama">
-        <a className="nav-link active" href="#dashboard"><Icon name="grid" />Ringkasan</a>
-        <a className="nav-link" href="#transactions"><Icon name="list" />Transaksi</a>
-        <a className="nav-link" href="#insights"><Icon name="chart" />Laporan</a>
+        <NavLink aria-label="Ringkasan" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} end to="/">
+          <Icon name="grid" /><span className="nav-label">Ringkasan</span>
+        </NavLink>
+        <NavLink aria-label="Transaksi" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/transaksi">
+          <Icon name="list" /><span className="nav-label">Transaksi</span>
+        </NavLink>
+        <NavLink aria-label="Laporan" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/laporan">
+          <Icon name="chart" /><span className="nav-label">Laporan</span>
+        </NavLink>
       </nav>
 
       <div className="sidebar-tip">
         <span className="tip-icon"><Icon name="spark" size={18} /></span>
         <strong>Langkah kecil, hasil besar.</strong>
         <p>Catat setiap transaksi untuk mengenal kebiasaan finansialmu.</p>
-        <a href="#transactions">Mulai mencatat <span aria-hidden="true">→</span></a>
+        <Link to="/transaksi">Mulai mencatat <span aria-hidden="true">→</span></Link>
       </div>
 
       <div className="sidebar-profile">
