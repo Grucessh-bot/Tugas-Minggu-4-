@@ -65,6 +65,11 @@
   gap: 17px;
 }
 
+.search {
+  width: min(100%, 380px);
+  margin: 0 0 22px;
+}
+
 .empty {
   display: grid;
   min-height: 230px;

@@ -1,12 +1,24 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../molecules/ProductCard";
+import ProductSearch from "../molecules/ProductSearch";
 import StoreHero from "../molecules/StoreHero";
 import products from "../../data/Product";
 import catalog from "../../data/catalog";
 import styles from "./Home.module.css";
 
 function Home() {
-  const featuredProducts = products.slice(0, 8);
+  const [search, setSearch] = useState("");
+  const query = search.trim().toLocaleLowerCase("id-ID");
+  const matchingProducts = products.filter((product) => {
+    const category = catalog.categories.find((item) => item.value === product.kategori);
+    return [
+      product.nama_product,
+      product.deskripsi,
+      category?.label ?? "",
+    ].some((value) => value.toLocaleLowerCase("id-ID").includes(query));
+  });
+  const visibleProducts = query ? matchingProducts : products.slice(0, 8);
 
   return (
     <div className={styles.home}>
@@ -42,13 +54,26 @@ function Home() {
         <div className={styles.sectionTopline}>
           <div>
             <p className={styles.eyebrow}>PILIHAN PAJRY TECH</p>
-            <h2 id="featured-title" className={styles.sectionTitle}>Produk pilihan</h2>
+            <h2 id="featured-title" className={styles.sectionTitle}>
+              {query ? "Hasil pencarian" : "Produk pilihan"}
+            </h2>
           </div>
-          <Link className={styles.viewAll} to="/kategori/smartphone">Lihat kategori <span aria-hidden="true">→</span></Link>
+          {!query && (
+            <Link className={styles.viewAll} to="/kategori/smartphone">
+              Lihat kategori <span aria-hidden="true">→</span>
+            </Link>
+          )}
+        </div>
+        <div className={styles.search}>
+          <ProductSearch onChange={setSearch} value={search} />
         </div>
         <div className={styles.productGrid}>
-          {featuredProducts.map((product) => <ProductCard key={product.id} product={product} />)}
+          {visibleProducts.map((product) => <ProductCard key={product.id} product={product} />)}
         </div>
+        {query && visibleProducts.length === 0 && (
+          <p className={styles.emptySearch} role="status">Tidak ada produk yang cocok dengan “{search.trim()}”.</p>
+        )}
+        {!query && <p className={styles.featuredCount}>Menampilkan 8 dari {products.length} produk</p>}
       </section>
     </div>
   );

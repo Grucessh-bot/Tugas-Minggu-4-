@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button";
 import { Link, useParams } from "react-router-dom";
 import products from "../../data/Product";
 import { formatPrice, getCategoryByValue } from "../../data/catalog";
@@ -48,9 +49,14 @@ function ProductDetail() {
           <p className={styles.price}>{formatPrice(product.harga)}</p>
           <div className={styles.rule} />
           <p className={styles.stock}><span aria-hidden="true" />Pilihan dari katalog Pajry Tech</p>
-          <Link className={styles.contact} to={`/kategori/${category.slug}`}>
+          <Button
+            className={styles.contact}
+            component={Link}
+            to={`/kategori/${category.slug}`}
+            variant="contained"
+          >
             Lihat produk serupa <span aria-hidden="true">→</span>
-          </Link>
+          </Button>
           <p className={styles.note}>Jelajahi produk lain dalam kategori yang sama.</p>
           <Link className={styles.backLink} to={`/kategori/${category.slug}`}>← Kembali ke {category.label}</Link>
         </div>

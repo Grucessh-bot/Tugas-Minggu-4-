@@ -1,34 +1,59 @@
-import { Link, NavLink } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import Toolbar from "@mui/material/Toolbar";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import navigation from "../../data/catalog";
 import styles from "./Header.module.css";
 
 function Header() {
+  const { pathname } = useLocation();
+
   return (
-    <header className={styles.header}>
-      <div className={styles.inner}>
+    <AppBar className={styles.header} component="header" position="sticky" elevation={0}>
+      <Toolbar className={styles.inner} disableGutters>
         <Link className={styles.brand} to="/" aria-label="Pajry Tech, beranda">
           <span className={styles.brandMark}>P</span>
           <span>PAJRY<span className={styles.brandAccent}>TECH</span></span>
         </Link>
         <nav className={styles.nav} aria-label="Kategori produk">
-          <NavLink className={({ isActive }) => `${styles.navLink}${isActive ? ` ${styles.active}` : ""}`} end to="/">
+          <Button
+            className={`${styles.navLink}${pathname === "/" ? ` ${styles.active}` : ""}`}
+            component={NavLink}
+            end
+            to="/"
+            color="inherit"
+            sx={{ minHeight: 76, borderRadius: 0 }}
+          >
             Semua produk
-          </NavLink>
-          {navigation.categories.map((category) => (
-            <NavLink
-              className={({ isActive }) => `${styles.navLink}${isActive ? ` ${styles.active}` : ""}`}
-              key={category.slug}
-              to={`/kategori/${category.slug}`}
-            >
-              {category.navLabel}
-            </NavLink>
-          ))}
+          </Button>
+          {navigation.categories.map((category) => {
+            const isActive = pathname === `/kategori/${category.slug}`;
+            return (
+              <Button
+                className={`${styles.navLink}${isActive ? ` ${styles.active}` : ""}`}
+                component={NavLink}
+                key={category.slug}
+                to={`/kategori/${category.slug}`}
+                color="inherit"
+                sx={{ minHeight: 76, borderRadius: 0 }}
+              >
+                {category.navLabel}
+              </Button>
+            );
+          })}
         </nav>
-        <Link className={styles.contactLink} to="/#produk-pilihan">
-          Produk pilihan <span aria-hidden="true">↗</span>
-        </Link>
-      </div>
-    </header>
+        <Button
+          className={styles.contactLink}
+          component={Link}
+          to="/#produk-pilihan"
+          variant="outlined"
+          color="secondary"
+          endIcon={<span aria-hidden="true">↗</span>}
+        >
+          Produk pilihan
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 }
 

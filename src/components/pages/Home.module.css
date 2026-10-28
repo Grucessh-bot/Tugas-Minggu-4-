@@ -130,6 +130,27 @@
   gap: 17px;
 }
 
+.search {
+  width: min(100%, 380px);
+  margin: 0 0 20px;
+}
+
+.emptySearch {
+  padding: 28px 20px;
+  border: 1px dashed #d9d9d2;
+  border-radius: 12px;
+  color: #777e76;
+  font-size: 13px;
+  text-align: center;
+}
+
+.featuredCount {
+  margin: 18px 0 0;
+  color: #8d928a;
+  font-size: 11px;
+  text-align: right;
+}
+
 @media (max-width: 960px) {
   .productGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
